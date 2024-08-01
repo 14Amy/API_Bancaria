@@ -1,0 +1,32 @@
+{
+  "version": "36.0.0",
+  "files": {
+    "202ce28adaa68573387c455a1f1b77aeab5caeea3757720d787d3c541ba83265": {
+      "source": {
+        "path": "asset.202ce28adaa68573387c455a1f1b77aeab5caeea3757720d787d3c541ba83265",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "202ce28adaa68573387c455a1f1b77aeab5caeea3757720d787d3c541ba83265.zip",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    },
+    "cccfc2521b79d1d7c37eb1038eb7ecf9b84476aabd37a8676fe9c2f98146396b": {
+      "source": {
+        "path": "BancariaApiStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "cccfc2521b79d1d7c37eb1038eb7ecf9b84476aabd37a8676fe9c2f98146396b.json",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

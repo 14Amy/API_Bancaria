@@ -1,0 +1,1803 @@
+{
+ "Resources": {
+  "MyVpcF9F0CA6F": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BancariaApiStack/MyVpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/MyVpc/Resource"
+   }
+  },
+  "MyVpcPublicSubnet1SubnetF6608456": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.0.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "BancariaApiStack/MyVpc/PublicSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "MyVpcF9F0CA6F"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/MyVpc/PublicSubnet1/Subnet"
+   }
+  },
+  "MyVpcPublicSubnet1RouteTableC46AB2F4": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BancariaApiStack/MyVpc/PublicSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "MyVpcF9F0CA6F"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/MyVpc/PublicSubnet1/RouteTable"
+   }
+  },
+  "MyVpcPublicSubnet1RouteTableAssociation2ECEE1CB": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "MyVpcPublicSubnet1RouteTableC46AB2F4"
+    },
+    "SubnetId": {
+     "Ref": "MyVpcPublicSubnet1SubnetF6608456"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/MyVpc/PublicSubnet1/RouteTableAssociation"
+   }
+  },
+  "MyVpcPublicSubnet1DefaultRoute95FDF9EB": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "MyVpcIGW5C4A4F63"
+    },
+    "RouteTableId": {
+     "Ref": "MyVpcPublicSubnet1RouteTableC46AB2F4"
+    }
+   },
+   "DependsOn": [
+    "MyVpcVPCGW488ACE0D"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/MyVpc/PublicSubnet1/DefaultRoute"
+   }
+  },
+  "MyVpcPublicSubnet1EIP096967CB": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BancariaApiStack/MyVpc/PublicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/MyVpc/PublicSubnet1/EIP"
+   }
+  },
+  "MyVpcPublicSubnet1NATGatewayAD3400C1": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "MyVpcPublicSubnet1EIP096967CB",
+      "AllocationId"
+     ]
+    },
+    "SubnetId": {
+     "Ref": "MyVpcPublicSubnet1SubnetF6608456"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BancariaApiStack/MyVpc/PublicSubnet1"
+     }
+    ]
+   },
+   "DependsOn": [
+    "MyVpcPublicSubnet1DefaultRoute95FDF9EB",
+    "MyVpcPublicSubnet1RouteTableAssociation2ECEE1CB"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/MyVpc/PublicSubnet1/NATGateway"
+   }
+  },
+  "MyVpcPublicSubnet2Subnet492B6BFB": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.64.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "BancariaApiStack/MyVpc/PublicSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "MyVpcF9F0CA6F"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/MyVpc/PublicSubnet2/Subnet"
+   }
+  },
+  "MyVpcPublicSubnet2RouteTable1DF17386": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BancariaApiStack/MyVpc/PublicSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "MyVpcF9F0CA6F"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/MyVpc/PublicSubnet2/RouteTable"
+   }
+  },
+  "MyVpcPublicSubnet2RouteTableAssociation227DE78D": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "MyVpcPublicSubnet2RouteTable1DF17386"
+    },
+    "SubnetId": {
+     "Ref": "MyVpcPublicSubnet2Subnet492B6BFB"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/MyVpc/PublicSubnet2/RouteTableAssociation"
+   }
+  },
+  "MyVpcPublicSubnet2DefaultRoute052936F6": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "MyVpcIGW5C4A4F63"
+    },
+    "RouteTableId": {
+     "Ref": "MyVpcPublicSubnet2RouteTable1DF17386"
+    }
+   },
+   "DependsOn": [
+    "MyVpcVPCGW488ACE0D"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/MyVpc/PublicSubnet2/DefaultRoute"
+   }
+  },
+  "MyVpcPublicSubnet2EIP8CCBA239": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BancariaApiStack/MyVpc/PublicSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/MyVpc/PublicSubnet2/EIP"
+   }
+  },
+  "MyVpcPublicSubnet2NATGateway91BFBEC9": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "MyVpcPublicSubnet2EIP8CCBA239",
+      "AllocationId"
+     ]
+    },
+    "SubnetId": {
+     "Ref": "MyVpcPublicSubnet2Subnet492B6BFB"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BancariaApiStack/MyVpc/PublicSubnet2"
+     }
+    ]
+   },
+   "DependsOn": [
+    "MyVpcPublicSubnet2DefaultRoute052936F6",
+    "MyVpcPublicSubnet2RouteTableAssociation227DE78D"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/MyVpc/PublicSubnet2/NATGateway"
+   }
+  },
+  "MyVpcPrivateSubnet1Subnet5057CF7E": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.128.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "BancariaApiStack/MyVpc/PrivateSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "MyVpcF9F0CA6F"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/MyVpc/PrivateSubnet1/Subnet"
+   }
+  },
+  "MyVpcPrivateSubnet1RouteTable8819E6E2": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BancariaApiStack/MyVpc/PrivateSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "MyVpcF9F0CA6F"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/MyVpc/PrivateSubnet1/RouteTable"
+   }
+  },
+  "MyVpcPrivateSubnet1RouteTableAssociation56D38C7E": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "MyVpcPrivateSubnet1RouteTable8819E6E2"
+    },
+    "SubnetId": {
+     "Ref": "MyVpcPrivateSubnet1Subnet5057CF7E"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/MyVpc/PrivateSubnet1/RouteTableAssociation"
+   }
+  },
+  "MyVpcPrivateSubnet1DefaultRouteA8CDE2FA": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "MyVpcPublicSubnet1NATGatewayAD3400C1"
+    },
+    "RouteTableId": {
+     "Ref": "MyVpcPrivateSubnet1RouteTable8819E6E2"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/MyVpc/PrivateSubnet1/DefaultRoute"
+   }
+  },
+  "MyVpcPrivateSubnet2Subnet0040C983": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.192.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "BancariaApiStack/MyVpc/PrivateSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "MyVpcF9F0CA6F"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/MyVpc/PrivateSubnet2/Subnet"
+   }
+  },
+  "MyVpcPrivateSubnet2RouteTableCEDCEECE": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BancariaApiStack/MyVpc/PrivateSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "MyVpcF9F0CA6F"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/MyVpc/PrivateSubnet2/RouteTable"
+   }
+  },
+  "MyVpcPrivateSubnet2RouteTableAssociation86A610DA": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "MyVpcPrivateSubnet2RouteTableCEDCEECE"
+    },
+    "SubnetId": {
+     "Ref": "MyVpcPrivateSubnet2Subnet0040C983"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/MyVpc/PrivateSubnet2/RouteTableAssociation"
+   }
+  },
+  "MyVpcPrivateSubnet2DefaultRoute9CE96294": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "MyVpcPublicSubnet2NATGateway91BFBEC9"
+    },
+    "RouteTableId": {
+     "Ref": "MyVpcPrivateSubnet2RouteTableCEDCEECE"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/MyVpc/PrivateSubnet2/DefaultRoute"
+   }
+  },
+  "MyVpcIGW5C4A4F63": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BancariaApiStack/MyVpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/MyVpc/IGW"
+   }
+  },
+  "MyVpcVPCGW488ACE0D": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "InternetGatewayId": {
+     "Ref": "MyVpcIGW5C4A4F63"
+    },
+    "VpcId": {
+     "Ref": "MyVpcF9F0CA6F"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/MyVpc/VPCGW"
+   }
+  },
+  "bancosegurodbSubnetGroupE892D8DD": {
+   "Type": "AWS::RDS::DBSubnetGroup",
+   "Properties": {
+    "DBSubnetGroupDescription": "Subnet group for bancosegurodb database",
+    "SubnetIds": [
+     {
+      "Ref": "MyVpcPrivateSubnet1Subnet5057CF7E"
+     },
+     {
+      "Ref": "MyVpcPrivateSubnet2Subnet0040C983"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/bancosegurodb/SubnetGroup/Default"
+   }
+  },
+  "bancosegurodbSecurityGroupE356C6CF": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Security group for bancosegurodb database",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "MyVpcF9F0CA6F"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/bancosegurodb/SecurityGroup/Resource"
+   }
+  },
+  "bancosegurodbSecretEAF4933A": {
+   "Type": "AWS::SecretsManager::Secret",
+   "Properties": {
+    "Description": {
+     "Fn::Join": [
+      "",
+      [
+       "Generated by the CDK for stack: ",
+       {
+        "Ref": "AWS::StackName"
+       }
+      ]
+     ]
+    },
+    "GenerateSecretString": {
+     "ExcludeCharacters": " %+~`#$&*()|[]{}:;<>?!'/@\"\\",
+     "GenerateStringKey": "password",
+     "PasswordLength": 30,
+     "SecretStringTemplate": "{\"username\":\"admin\"}"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/bancosegurodb/Secret/Resource"
+   }
+  },
+  "bancosegurodbSecretAttachment46E139DD": {
+   "Type": "AWS::SecretsManager::SecretTargetAttachment",
+   "Properties": {
+    "SecretId": {
+     "Ref": "bancosegurodbSecretEAF4933A"
+    },
+    "TargetId": {
+     "Ref": "bancosegurodbDA2D7602"
+    },
+    "TargetType": "AWS::RDS::DBInstance"
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/bancosegurodb/Secret/Attachment/Resource"
+   }
+  },
+  "bancosegurodbDA2D7602": {
+   "Type": "AWS::RDS::DBInstance",
+   "Properties": {
+    "AllocatedStorage": "100",
+    "CopyTagsToSnapshot": true,
+    "DBInstanceClass": "db.t2.small",
+    "DBSubnetGroupName": {
+     "Ref": "bancosegurodbSubnetGroupE892D8DD"
+    },
+    "DeleteAutomatedBackups": true,
+    "Engine": "mysql",
+    "EngineVersion": "8.0",
+    "MasterUserPassword": {
+     "Fn::Join": [
+      "",
+      [
+       "{{resolve:secretsmanager:",
+       {
+        "Ref": "bancosegurodbSecretEAF4933A"
+       },
+       ":SecretString:password::}}"
+      ]
+     ]
+    },
+    "MasterUsername": {
+     "Fn::Join": [
+      "",
+      [
+       "{{resolve:secretsmanager:",
+       {
+        "Ref": "bancosegurodbSecretEAF4933A"
+       },
+       ":SecretString:username::}}"
+      ]
+     ]
+    },
+    "StorageType": "gp2",
+    "VPCSecurityGroups": [
+     {
+      "Fn::GetAtt": [
+       "bancosegurodbSecurityGroupE356C6CF",
+       "GroupId"
+      ]
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Snapshot",
+   "DeletionPolicy": "Snapshot",
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/bancosegurodb/Resource"
+   }
+  },
+  "BancariaApi938FA678": {
+   "Type": "AWS::ApiGateway::RestApi",
+   "Properties": {
+    "Name": "BancariaApi"
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/BancariaApi/Resource"
+   }
+  },
+  "BancariaApiCloudWatchRoleD794BAFB": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "apigateway.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+       ]
+      ]
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/BancariaApi/CloudWatchRole/Resource"
+   }
+  },
+  "BancariaApiAccount16862A83": {
+   "Type": "AWS::ApiGateway::Account",
+   "Properties": {
+    "CloudWatchRoleArn": {
+     "Fn::GetAtt": [
+      "BancariaApiCloudWatchRoleD794BAFB",
+      "Arn"
+     ]
+    }
+   },
+   "DependsOn": [
+    "BancariaApi938FA678"
+   ],
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/BancariaApi/Account"
+   }
+  },
+  "BancariaApiDeploymentE618166620bec4de4415d432b40add7c396c1821": {
+   "Type": "AWS::ApiGateway::Deployment",
+   "Properties": {
+    "Description": "Automatically created by the RestApi construct",
+    "RestApiId": {
+     "Ref": "BancariaApi938FA678"
+    }
+   },
+   "DependsOn": [
+    "BancariaApicambiarclavePOSTDA83C28C",
+    "BancariaApicambiarclave94E6FAED",
+    "BancariaApidepositarPOST037CA5A8",
+    "BancariaApidepositar0BE0E750",
+    "BancariaApiretirarPOST4B7FD494",
+    "BancariaApiretirar1EF19713"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/BancariaApi/Deployment/Resource"
+   }
+  },
+  "BancariaApiDeploymentStageprodA31A4B2A": {
+   "Type": "AWS::ApiGateway::Stage",
+   "Properties": {
+    "DeploymentId": {
+     "Ref": "BancariaApiDeploymentE618166620bec4de4415d432b40add7c396c1821"
+    },
+    "RestApiId": {
+     "Ref": "BancariaApi938FA678"
+    },
+    "StageName": "prod"
+   },
+   "DependsOn": [
+    "BancariaApiAccount16862A83"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/BancariaApi/DeploymentStage.prod/Resource"
+   }
+  },
+  "BancariaApidepositar0BE0E750": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Fn::GetAtt": [
+      "BancariaApi938FA678",
+      "RootResourceId"
+     ]
+    },
+    "PathPart": "depositar",
+    "RestApiId": {
+     "Ref": "BancariaApi938FA678"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/BancariaApi/Default/depositar/Resource"
+   }
+  },
+  "BancariaApidepositarPOSTApiPermissionBancariaApiStackBancariaApi96E8840DPOSTdepositarD0E16CDD": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "DepositarDineroLambda782F0D6E",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "BancariaApi938FA678"
+       },
+       "/",
+       {
+        "Ref": "BancariaApiDeploymentStageprodA31A4B2A"
+       },
+       "/POST/depositar"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/BancariaApi/Default/depositar/POST/ApiPermission.BancariaApiStackBancariaApi96E8840D.POST..depositar"
+   }
+  },
+  "BancariaApidepositarPOSTApiPermissionTestBancariaApiStackBancariaApi96E8840DPOSTdepositarC0A0697F": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "DepositarDineroLambda782F0D6E",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "BancariaApi938FA678"
+       },
+       "/test-invoke-stage/POST/depositar"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/BancariaApi/Default/depositar/POST/ApiPermission.Test.BancariaApiStackBancariaApi96E8840D.POST..depositar"
+   }
+  },
+  "BancariaApidepositarPOST037CA5A8": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "POST",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:",
+        {
+         "Ref": "AWS::Region"
+        },
+        ":lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "DepositarDineroLambda782F0D6E",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "BancariaApidepositar0BE0E750"
+    },
+    "RestApiId": {
+     "Ref": "BancariaApi938FA678"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/BancariaApi/Default/depositar/POST/Resource"
+   }
+  },
+  "BancariaApiretirar1EF19713": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Fn::GetAtt": [
+      "BancariaApi938FA678",
+      "RootResourceId"
+     ]
+    },
+    "PathPart": "retirar",
+    "RestApiId": {
+     "Ref": "BancariaApi938FA678"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/BancariaApi/Default/retirar/Resource"
+   }
+  },
+  "BancariaApiretirarPOSTApiPermissionBancariaApiStackBancariaApi96E8840DPOSTretirar7A05D293": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "RetirarDineroLambda0F630EB1",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "BancariaApi938FA678"
+       },
+       "/",
+       {
+        "Ref": "BancariaApiDeploymentStageprodA31A4B2A"
+       },
+       "/POST/retirar"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/BancariaApi/Default/retirar/POST/ApiPermission.BancariaApiStackBancariaApi96E8840D.POST..retirar"
+   }
+  },
+  "BancariaApiretirarPOSTApiPermissionTestBancariaApiStackBancariaApi96E8840DPOSTretirar8FEEB5F5": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "RetirarDineroLambda0F630EB1",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "BancariaApi938FA678"
+       },
+       "/test-invoke-stage/POST/retirar"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/BancariaApi/Default/retirar/POST/ApiPermission.Test.BancariaApiStackBancariaApi96E8840D.POST..retirar"
+   }
+  },
+  "BancariaApiretirarPOST4B7FD494": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "POST",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:",
+        {
+         "Ref": "AWS::Region"
+        },
+        ":lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "RetirarDineroLambda0F630EB1",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "BancariaApiretirar1EF19713"
+    },
+    "RestApiId": {
+     "Ref": "BancariaApi938FA678"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/BancariaApi/Default/retirar/POST/Resource"
+   }
+  },
+  "BancariaApicambiarclave94E6FAED": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Fn::GetAtt": [
+      "BancariaApi938FA678",
+      "RootResourceId"
+     ]
+    },
+    "PathPart": "cambiar_clave",
+    "RestApiId": {
+     "Ref": "BancariaApi938FA678"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/BancariaApi/Default/cambiar_clave/Resource"
+   }
+  },
+  "BancariaApicambiarclavePOSTApiPermissionBancariaApiStackBancariaApi96E8840DPOSTcambiarclaveD031F7C2": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "CambiarClaveLambda2B960EDB",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "BancariaApi938FA678"
+       },
+       "/",
+       {
+        "Ref": "BancariaApiDeploymentStageprodA31A4B2A"
+       },
+       "/POST/cambiar_clave"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/BancariaApi/Default/cambiar_clave/POST/ApiPermission.BancariaApiStackBancariaApi96E8840D.POST..cambiar_clave"
+   }
+  },
+  "BancariaApicambiarclavePOSTApiPermissionTestBancariaApiStackBancariaApi96E8840DPOSTcambiarclaveA6756183": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "CambiarClaveLambda2B960EDB",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "BancariaApi938FA678"
+       },
+       "/test-invoke-stage/POST/cambiar_clave"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/BancariaApi/Default/cambiar_clave/POST/ApiPermission.Test.BancariaApiStackBancariaApi96E8840D.POST..cambiar_clave"
+   }
+  },
+  "BancariaApicambiarclavePOSTDA83C28C": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "POST",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:",
+        {
+         "Ref": "AWS::Region"
+        },
+        ":lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "CambiarClaveLambda2B960EDB",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "BancariaApicambiarclave94E6FAED"
+    },
+    "RestApiId": {
+     "Ref": "BancariaApi938FA678"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/BancariaApi/Default/cambiar_clave/POST/Resource"
+   }
+  },
+  "DepositarDineroLambdaServiceRoleE522D1EE": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/DepositarDineroLambda/ServiceRole/Resource"
+   }
+  },
+  "DepositarDineroLambdaServiceRoleDefaultPolicyED21A775": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "rds:Connect",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":rds:",
+          {
+           "Ref": "AWS::Region"
+          },
+          ":",
+          {
+           "Ref": "AWS::AccountId"
+          },
+          ":db:",
+          {
+           "Ref": "bancosegurodbDA2D7602"
+          }
+         ]
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "DepositarDineroLambdaServiceRoleDefaultPolicyED21A775",
+    "Roles": [
+     {
+      "Ref": "DepositarDineroLambdaServiceRoleE522D1EE"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/DepositarDineroLambda/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "DepositarDineroLambda782F0D6E": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "202ce28adaa68573387c455a1f1b77aeab5caeea3757720d787d3c541ba83265.zip"
+    },
+    "Environment": {
+     "Variables": {
+      "DATABASE_HOST": {
+       "Fn::GetAtt": [
+        "bancosegurodbDA2D7602",
+        "Endpoint.Address"
+       ]
+      },
+      "DATABASE_PORT": {
+       "Fn::GetAtt": [
+        "bancosegurodbDA2D7602",
+        "Endpoint.Port"
+       ]
+      },
+      "DATABASE_NAME": "bancosegurodb",
+      "DATABASE_USER": "usuario_api",
+      "DATABASE_PASSWORD": "ABCD12345"
+     }
+    },
+    "Handler": "lambda/index.handler",
+    "MemorySize": 128,
+    "Role": {
+     "Fn::GetAtt": [
+      "DepositarDineroLambdaServiceRoleE522D1EE",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs16.x",
+    "Timeout": 30
+   },
+   "DependsOn": [
+    "DepositarDineroLambdaServiceRoleDefaultPolicyED21A775",
+    "DepositarDineroLambdaServiceRoleE522D1EE"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/DepositarDineroLambda/Resource",
+    "aws:asset:path": "asset.202ce28adaa68573387c455a1f1b77aeab5caeea3757720d787d3c541ba83265",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "RetirarDineroLambdaServiceRoleB15FB535": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/RetirarDineroLambda/ServiceRole/Resource"
+   }
+  },
+  "RetirarDineroLambdaServiceRoleDefaultPolicy31B32710": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "rds:Connect",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":rds:",
+          {
+           "Ref": "AWS::Region"
+          },
+          ":",
+          {
+           "Ref": "AWS::AccountId"
+          },
+          ":db:",
+          {
+           "Ref": "bancosegurodbDA2D7602"
+          }
+         ]
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "RetirarDineroLambdaServiceRoleDefaultPolicy31B32710",
+    "Roles": [
+     {
+      "Ref": "RetirarDineroLambdaServiceRoleB15FB535"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/RetirarDineroLambda/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "RetirarDineroLambda0F630EB1": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "202ce28adaa68573387c455a1f1b77aeab5caeea3757720d787d3c541ba83265.zip"
+    },
+    "Environment": {
+     "Variables": {
+      "DATABASE_HOST": {
+       "Fn::GetAtt": [
+        "bancosegurodbDA2D7602",
+        "Endpoint.Address"
+       ]
+      },
+      "DATABASE_PORT": {
+       "Fn::GetAtt": [
+        "bancosegurodbDA2D7602",
+        "Endpoint.Port"
+       ]
+      },
+      "DATABASE_NAME": "bancosegurodb",
+      "DATABASE_USER": "usuario_api",
+      "DATABASE_PASSWORD": "ABCD12345"
+     }
+    },
+    "Handler": "lambda/index.handler",
+    "MemorySize": 128,
+    "Role": {
+     "Fn::GetAtt": [
+      "RetirarDineroLambdaServiceRoleB15FB535",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs16.x",
+    "Timeout": 30
+   },
+   "DependsOn": [
+    "RetirarDineroLambdaServiceRoleDefaultPolicy31B32710",
+    "RetirarDineroLambdaServiceRoleB15FB535"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/RetirarDineroLambda/Resource",
+    "aws:asset:path": "asset.202ce28adaa68573387c455a1f1b77aeab5caeea3757720d787d3c541ba83265",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "CambiarClaveLambdaServiceRole17CE219E": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/CambiarClaveLambda/ServiceRole/Resource"
+   }
+  },
+  "CambiarClaveLambdaServiceRoleDefaultPolicy27177A4D": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "rds:Connect",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":rds:",
+          {
+           "Ref": "AWS::Region"
+          },
+          ":",
+          {
+           "Ref": "AWS::AccountId"
+          },
+          ":db:",
+          {
+           "Ref": "bancosegurodbDA2D7602"
+          }
+         ]
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "CambiarClaveLambdaServiceRoleDefaultPolicy27177A4D",
+    "Roles": [
+     {
+      "Ref": "CambiarClaveLambdaServiceRole17CE219E"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/CambiarClaveLambda/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "CambiarClaveLambda2B960EDB": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "202ce28adaa68573387c455a1f1b77aeab5caeea3757720d787d3c541ba83265.zip"
+    },
+    "Environment": {
+     "Variables": {
+      "DATABASE_HOST": {
+       "Fn::GetAtt": [
+        "bancosegurodbDA2D7602",
+        "Endpoint.Address"
+       ]
+      },
+      "DATABASE_PORT": {
+       "Fn::GetAtt": [
+        "bancosegurodbDA2D7602",
+        "Endpoint.Port"
+       ]
+      },
+      "DATABASE_NAME": "bancosegurodb",
+      "DATABASE_USER": "usuario_api",
+      "DATABASE_PASSWORD": "ABCD12345"
+     }
+    },
+    "Handler": "lambda/index.handler",
+    "MemorySize": 128,
+    "Role": {
+     "Fn::GetAtt": [
+      "CambiarClaveLambdaServiceRole17CE219E",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs16.x",
+    "Timeout": 30
+   },
+   "DependsOn": [
+    "CambiarClaveLambdaServiceRoleDefaultPolicy27177A4D",
+    "CambiarClaveLambdaServiceRole17CE219E"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/CambiarClaveLambda/Resource",
+    "aws:asset:path": "asset.202ce28adaa68573387c455a1f1b77aeab5caeea3757720d787d3c541ba83265",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/11RwU7DMAz9Fu5ZGAM+oNtg2gGoWrTr5KZeF9YmVewwTVX/HaWh6+Dk55cX+9leyIfnuZzfwZlmqjzNal3ILmdQJwFn2neoFrLbtUqsDmaXrkTqi1qr3BcGOXATyqxn/ISixomfuITIKg2srbmKA3jZpiG8A2+A8QwXkTr9DYxT4a1hdAavgujkN0uYQR0bNCxyVN5pvmyc9e3g4ZbohStJdmtgKIBwa4jBKBSxz/XPenlLjOoclYtm1svxZy9oYKkBAxU62cWWQRjDJ7gK+cbhVfD/pRfQ6ipOJLsMiZNWD3uaYKKU9YbFGtvaXsZ6N1nOUMXdDyBDst4pXAJNyW/NiN+Qj7YMVES90NDILrPxhENMba3VsPOIelFDU5QwTJuiazRRuOmrN2o87oh7QY97IEImmYQg6FEuvTohB1P9H1cfnlvPYtCFAbSp/phdHczKmlLHwsaWKL/o/nsxlw9Pcn73RVrPnDesG5RZjD+lUw+A3AIAAA=="
+   },
+   "Metadata": {
+    "aws:cdk:path": "BancariaApiStack/CDKMetadata/Default"
+   },
+   "Condition": "CDKMetadataAvailable"
+  }
+ },
+ "Outputs": {
+  "BancariaApiEndpoint0893F43B": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Ref": "BancariaApi938FA678"
+      },
+      ".execute-api.",
+      {
+       "Ref": "AWS::Region"
+      },
+      ".",
+      {
+       "Ref": "AWS::URLSuffix"
+      },
+      "/",
+      {
+       "Ref": "BancariaApiDeploymentStageprodA31A4B2A"
+      },
+      "/"
+     ]
+    ]
+   }
+  }
+ },
+ "Conditions": {
+  "CDKMetadataAvailable": {
+   "Fn::Or": [
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "af-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-northwest-1"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "il-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "sa-east-1"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-2"
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

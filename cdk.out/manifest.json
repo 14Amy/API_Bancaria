@@ -1,0 +1,401 @@
+{
+  "version": "36.0.0",
+  "artifacts": {
+    "BancariaApiStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "BancariaApiStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "BancariaApiStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "BancariaApiStack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/cccfc2521b79d1d7c37eb1038eb7ecf9b84476aabd37a8676fe9c2f98146396b.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "BancariaApiStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "BancariaApiStack.assets"
+      ],
+      "metadata": {
+        "/BancariaApiStack/MyVpc/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MyVpcF9F0CA6F"
+          }
+        ],
+        "/BancariaApiStack/MyVpc/PublicSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MyVpcPublicSubnet1SubnetF6608456"
+          }
+        ],
+        "/BancariaApiStack/MyVpc/PublicSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MyVpcPublicSubnet1RouteTableC46AB2F4"
+          }
+        ],
+        "/BancariaApiStack/MyVpc/PublicSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MyVpcPublicSubnet1RouteTableAssociation2ECEE1CB"
+          }
+        ],
+        "/BancariaApiStack/MyVpc/PublicSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MyVpcPublicSubnet1DefaultRoute95FDF9EB"
+          }
+        ],
+        "/BancariaApiStack/MyVpc/PublicSubnet1/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MyVpcPublicSubnet1EIP096967CB"
+          }
+        ],
+        "/BancariaApiStack/MyVpc/PublicSubnet1/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MyVpcPublicSubnet1NATGatewayAD3400C1"
+          }
+        ],
+        "/BancariaApiStack/MyVpc/PublicSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MyVpcPublicSubnet2Subnet492B6BFB"
+          }
+        ],
+        "/BancariaApiStack/MyVpc/PublicSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MyVpcPublicSubnet2RouteTable1DF17386"
+          }
+        ],
+        "/BancariaApiStack/MyVpc/PublicSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MyVpcPublicSubnet2RouteTableAssociation227DE78D"
+          }
+        ],
+        "/BancariaApiStack/MyVpc/PublicSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MyVpcPublicSubnet2DefaultRoute052936F6"
+          }
+        ],
+        "/BancariaApiStack/MyVpc/PublicSubnet2/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MyVpcPublicSubnet2EIP8CCBA239"
+          }
+        ],
+        "/BancariaApiStack/MyVpc/PublicSubnet2/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MyVpcPublicSubnet2NATGateway91BFBEC9"
+          }
+        ],
+        "/BancariaApiStack/MyVpc/PrivateSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MyVpcPrivateSubnet1Subnet5057CF7E"
+          }
+        ],
+        "/BancariaApiStack/MyVpc/PrivateSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MyVpcPrivateSubnet1RouteTable8819E6E2"
+          }
+        ],
+        "/BancariaApiStack/MyVpc/PrivateSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MyVpcPrivateSubnet1RouteTableAssociation56D38C7E"
+          }
+        ],
+        "/BancariaApiStack/MyVpc/PrivateSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MyVpcPrivateSubnet1DefaultRouteA8CDE2FA"
+          }
+        ],
+        "/BancariaApiStack/MyVpc/PrivateSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MyVpcPrivateSubnet2Subnet0040C983"
+          }
+        ],
+        "/BancariaApiStack/MyVpc/PrivateSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MyVpcPrivateSubnet2RouteTableCEDCEECE"
+          }
+        ],
+        "/BancariaApiStack/MyVpc/PrivateSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MyVpcPrivateSubnet2RouteTableAssociation86A610DA"
+          }
+        ],
+        "/BancariaApiStack/MyVpc/PrivateSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MyVpcPrivateSubnet2DefaultRoute9CE96294"
+          }
+        ],
+        "/BancariaApiStack/MyVpc/IGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MyVpcIGW5C4A4F63"
+          }
+        ],
+        "/BancariaApiStack/MyVpc/VPCGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MyVpcVPCGW488ACE0D"
+          }
+        ],
+        "/BancariaApiStack/bancosegurodb/SubnetGroup/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bancosegurodbSubnetGroupE892D8DD"
+          }
+        ],
+        "/BancariaApiStack/bancosegurodb/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bancosegurodbSecurityGroupE356C6CF"
+          }
+        ],
+        "/BancariaApiStack/bancosegurodb/Secret/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bancosegurodbSecretEAF4933A"
+          }
+        ],
+        "/BancariaApiStack/bancosegurodb/Secret/Attachment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bancosegurodbSecretAttachment46E139DD"
+          }
+        ],
+        "/BancariaApiStack/bancosegurodb/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bancosegurodbDA2D7602"
+          }
+        ],
+        "/BancariaApiStack/BancariaApi/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BancariaApi938FA678"
+          }
+        ],
+        "/BancariaApiStack/BancariaApi/CloudWatchRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BancariaApiCloudWatchRoleD794BAFB"
+          }
+        ],
+        "/BancariaApiStack/BancariaApi/Account": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BancariaApiAccount16862A83"
+          }
+        ],
+        "/BancariaApiStack/BancariaApi/Deployment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BancariaApiDeploymentE618166620bec4de4415d432b40add7c396c1821"
+          }
+        ],
+        "/BancariaApiStack/BancariaApi/DeploymentStage.prod/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BancariaApiDeploymentStageprodA31A4B2A"
+          }
+        ],
+        "/BancariaApiStack/BancariaApi/Endpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BancariaApiEndpoint0893F43B"
+          }
+        ],
+        "/BancariaApiStack/BancariaApi/Default/depositar/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BancariaApidepositar0BE0E750"
+          }
+        ],
+        "/BancariaApiStack/BancariaApi/Default/depositar/POST/ApiPermission.BancariaApiStackBancariaApi96E8840D.POST..depositar": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BancariaApidepositarPOSTApiPermissionBancariaApiStackBancariaApi96E8840DPOSTdepositarD0E16CDD"
+          }
+        ],
+        "/BancariaApiStack/BancariaApi/Default/depositar/POST/ApiPermission.Test.BancariaApiStackBancariaApi96E8840D.POST..depositar": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BancariaApidepositarPOSTApiPermissionTestBancariaApiStackBancariaApi96E8840DPOSTdepositarC0A0697F"
+          }
+        ],
+        "/BancariaApiStack/BancariaApi/Default/depositar/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BancariaApidepositarPOST037CA5A8"
+          }
+        ],
+        "/BancariaApiStack/BancariaApi/Default/retirar/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BancariaApiretirar1EF19713"
+          }
+        ],
+        "/BancariaApiStack/BancariaApi/Default/retirar/POST/ApiPermission.BancariaApiStackBancariaApi96E8840D.POST..retirar": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BancariaApiretirarPOSTApiPermissionBancariaApiStackBancariaApi96E8840DPOSTretirar7A05D293"
+          }
+        ],
+        "/BancariaApiStack/BancariaApi/Default/retirar/POST/ApiPermission.Test.BancariaApiStackBancariaApi96E8840D.POST..retirar": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BancariaApiretirarPOSTApiPermissionTestBancariaApiStackBancariaApi96E8840DPOSTretirar8FEEB5F5"
+          }
+        ],
+        "/BancariaApiStack/BancariaApi/Default/retirar/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BancariaApiretirarPOST4B7FD494"
+          }
+        ],
+        "/BancariaApiStack/BancariaApi/Default/cambiar_clave/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BancariaApicambiarclave94E6FAED"
+          }
+        ],
+        "/BancariaApiStack/BancariaApi/Default/cambiar_clave/POST/ApiPermission.BancariaApiStackBancariaApi96E8840D.POST..cambiar_clave": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BancariaApicambiarclavePOSTApiPermissionBancariaApiStackBancariaApi96E8840DPOSTcambiarclaveD031F7C2"
+          }
+        ],
+        "/BancariaApiStack/BancariaApi/Default/cambiar_clave/POST/ApiPermission.Test.BancariaApiStackBancariaApi96E8840D.POST..cambiar_clave": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BancariaApicambiarclavePOSTApiPermissionTestBancariaApiStackBancariaApi96E8840DPOSTcambiarclaveA6756183"
+          }
+        ],
+        "/BancariaApiStack/BancariaApi/Default/cambiar_clave/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BancariaApicambiarclavePOSTDA83C28C"
+          }
+        ],
+        "/BancariaApiStack/DepositarDineroLambda/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DepositarDineroLambdaServiceRoleE522D1EE"
+          }
+        ],
+        "/BancariaApiStack/DepositarDineroLambda/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DepositarDineroLambdaServiceRoleDefaultPolicyED21A775"
+          }
+        ],
+        "/BancariaApiStack/DepositarDineroLambda/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DepositarDineroLambda782F0D6E"
+          }
+        ],
+        "/BancariaApiStack/RetirarDineroLambda/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RetirarDineroLambdaServiceRoleB15FB535"
+          }
+        ],
+        "/BancariaApiStack/RetirarDineroLambda/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RetirarDineroLambdaServiceRoleDefaultPolicy31B32710"
+          }
+        ],
+        "/BancariaApiStack/RetirarDineroLambda/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RetirarDineroLambda0F630EB1"
+          }
+        ],
+        "/BancariaApiStack/CambiarClaveLambda/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CambiarClaveLambdaServiceRole17CE219E"
+          }
+        ],
+        "/BancariaApiStack/CambiarClaveLambda/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CambiarClaveLambdaServiceRoleDefaultPolicy27177A4D"
+          }
+        ],
+        "/BancariaApiStack/CambiarClaveLambda/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CambiarClaveLambda2B960EDB"
+          }
+        ],
+        "/BancariaApiStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/BancariaApiStack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/BancariaApiStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/BancariaApiStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "BancariaApiStack"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}
